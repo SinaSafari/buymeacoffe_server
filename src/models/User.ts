@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
+  OneToMany,
 } from "typeorm";
 
 export enum UserRole {
@@ -12,6 +13,8 @@ export enum UserRole {
   CREATOR = "CREATOR",
   DONATOR = "DONATOR",
 }
+
+import { Post, Like } from "./index";
 
 @Entity()
 export class User extends BaseEntity {
@@ -34,6 +37,12 @@ export class User extends BaseEntity {
   // role!: UserRole;
   @Column({ default: "DONATOR" })
   role!: string;
+
+  @OneToMany((type) => Post, (post) => post.owner)
+  posts!: Post[];
+
+  @OneToMany((type) => Like, (like) => like.user_id)
+  likes!: Like[];
 
   @CreateDateColumn()
   createdAt!: Date;

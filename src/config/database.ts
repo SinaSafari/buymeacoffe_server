@@ -1,5 +1,5 @@
 import { ConnectionOptions } from "typeorm";
-import { User } from "../models";
+import { User, Post, Like } from "../models";
 
 // const config: ConnectionOptions = {
 //   type: "postgres",
@@ -13,13 +13,13 @@ import { User } from "../models";
 // };
 
 function generateConfigObj(): ConnectionOptions {
-  const entitiesArr = [User];
+  const entitiesArr = [User, Post, Like];
   if (process.env.APP_MODE === "development") {
     console.log("development");
     return {
       type: "sqlite",
       database: "./mydb.sqlite",
-      dropSchema: false,
+      dropSchema: true,
       entities: entitiesArr,
       synchronize: true,
       logging: false,
