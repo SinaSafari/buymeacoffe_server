@@ -1,7 +1,7 @@
 import { getRepository } from "typeorm";
 import { User } from "../models";
 
-export interface IUserPayload {
+export interface IUserPayload2 {
   firstname: string;
   lastname: string;
   email: string;
@@ -12,7 +12,7 @@ export const getUsers = async (): Promise<Array<User>> => {
   return userRepository.find();
 };
 
-export const createUser = async (payload: IUserPayload): Promise<User> => {
+export const createUser = async (payload: IUserPayload2): Promise<User> => {
   const userRepository = getRepository(User);
   const user = new User();
   return userRepository.save({

@@ -2,7 +2,7 @@
   "entryFile": "src/index.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
   "spec": {
-    "outputDirectory": "public",
+    "outputDirectory": "public/docs",
     "specVersion": 3
   }
 }

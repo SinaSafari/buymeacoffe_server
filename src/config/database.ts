@@ -19,7 +19,7 @@ function generateConfigObj(): ConnectionOptions {
     return {
       type: "sqlite",
       database: "./mydb.sqlite",
-      dropSchema: true,
+      dropSchema: false,
       entities: entitiesArr,
       synchronize: true,
       logging: false,

@@ -33,6 +33,12 @@
 					"email": {
 						"type": "string"
 					},
+					"password": {
+						"type": "string"
+					},
+					"role": {
+						"type": "string"
+					},
 					"createdAt": {
 						"type": "string",
 						"format": "date-time"
@@ -47,13 +53,15 @@
 					"firstName",
 					"lastName",
 					"email",
+					"password",
+					"role",
 					"createdAt",
 					"updatedAt"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"IUserPayload": {
+			"IUserPayload2": {
 				"properties": {
 					"firstname": {
 						"type": "string"
@@ -69,6 +77,82 @@
 					"firstname",
 					"lastname",
 					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IAuthSuccessResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"userEmail": {
+						"type": "string"
+					},
+					"token": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"success",
+					"userEmail",
+					"token"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IAuthFailureResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"msg": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"success",
+					"msg"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ILoginDTO": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IRegisterDTO": {
+				"properties": {
+					"fisrtname": {
+						"type": "string"
+					},
+					"lastname": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"fisrtname",
+					"lastname",
+					"email",
+					"password"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -153,7 +237,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/IUserPayload"
+								"$ref": "#/components/schemas/IUserPayload2"
 							}
 						}
 					}
@@ -194,6 +278,84 @@
 						}
 					}
 				]
+			}
+		},
+		"/auth/login": {
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/IAuthSuccessResponse"
+										},
+										{
+											"$ref": "#/components/schemas/IAuthFailureResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ILoginDTO"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/register": {
+			"post": {
+				"operationId": "Register",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/IAuthSuccessResponse"
+										},
+										{
+											"$ref": "#/components/schemas/IAuthFailureResponse"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IRegisterDTO"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

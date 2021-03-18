@@ -1,6 +1,7 @@
 import express from "express";
 import PingController from "../controllers/Ping";
-import UserRouter from "./user.router";
+import UserRouter from "./userRrouter";
+import AuthRouter from "./AuthRouter";
 
 const router = express.Router();
 
@@ -10,6 +11,7 @@ router.get("/ping", async (_req, res) => {
   return res.send(response);
 });
 
+router.use("/auth", AuthRouter);
 router.use("/users", UserRouter);
 
 export default router;

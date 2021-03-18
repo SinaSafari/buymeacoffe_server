@@ -3,7 +3,7 @@ import { User } from "../models";
 import {
   getUsers,
   createUser,
-  IUserPayload,
+  IUserPayload2,
   getUser,
 } from "../repositories/user";
 
@@ -16,7 +16,7 @@ export default class UserController {
   }
 
   @Post("/")
-  public async createUser(@Body() body: IUserPayload): Promise<User> {
+  public async createUser(@Body() body: IUserPayload2): Promise<User> {
     return createUser(body);
   }
 
